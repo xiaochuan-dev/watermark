@@ -18,17 +18,17 @@ jobs:
           pip install blind-watermark
       - name: build
         run: |
-          curl -o test.jpeg https://tu.sioe.cn/gj/qiege/image.jpg
+          curl -o test.jpg https://tu.sioe.cn/gj/qiege/image.jpg
           ls -l
-          blind_watermark --embed --pwd 1234 ${{ github.workspace }}/test.jpeg "watermark text" ${{ github.workspace }}/embedded.png
+          blind_watermark --embed --pwd 1234 ${{ github.workspace }}/test.jpg "watermark text" ${{ github.workspace }}/embedded.jpg
       - name: test
         run: |
-          blind_watermark --extract --pwd 1234 --wm_shape 111 ${{ github.workspace }}/test.jpeg
+          blind_watermark --extract --pwd 1234 --wm_shape 111 ${{ github.workspace }}/test.jpg
 
       - name: Save
         uses: actions/upload-artifact@v4
         with:
           name: img
-          path: ./*.jpeg
+          path: ./*.jpg
 
     
