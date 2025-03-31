@@ -1,0 +1,33 @@
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' 
+      - name: Install Dep
+        run: |
+          pip install blind-watermark
+      - name: build
+        run: |
+          curl -o test.jpeg https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.88tph.com%2Fsucai%2F13342765.html&psig=AOvVaw3_3iCzwQ7vCz4KqyP_slTV&ust=1743481896975000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJjy8qq-s4wDFQAAAAAdAAAAABAE
+          blind_watermark --embed --pwd 1234 ./test.jpeg "watermark text" ./embedded.png
+      - name: test
+        run: |
+          blind_watermark --extract --pwd 1234 --wm_shape 111 ./test.jpeg
+
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: img
+          path: ./*.jpeg
+
+    
