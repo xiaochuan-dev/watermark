@@ -19,6 +19,7 @@ jobs:
       - name: build
         run: |
           curl -o test.jpeg https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.88tph.com%2Fsucai%2F13342765.html&psig=AOvVaw3_3iCzwQ7vCz4KqyP_slTV&ust=1743481896975000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJjy8qq-s4wDFQAAAAAdAAAAABAE
+          ls -l
           blind_watermark --embed --pwd 1234 ${{ github.workspace }}/test.jpeg "watermark text" ${{ github.workspace }}/embedded.png
       - name: test
         run: |
